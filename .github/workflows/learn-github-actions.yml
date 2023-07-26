@@ -1,3 +1,7 @@
+name: learn-github-actions
+run-name: Robert is learning GitHub Actions
+on: [push]
+
 jobs: # groups the jobs to be executed in this workflow
 
   build: # defines a job called build
