@@ -27,3 +27,21 @@ jobs: # groups the jobs to be executed in this workflow
       # Execute gradle build command with stacktrace flag
       - name: Build with gradle
         run: ./gradlew build --stacktrace # Execute gradle script to build project
+
+  unit-tests: #Defines another job called unit tests
+    name: 🧪 Unit Tests
+    # needs: [ lint-check ] # This job's execution is dependant on whether `lint-check` job completes successfully
+    runs-on: ubuntu-latest
+    steps:
+
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Execute unit tests
+        run: ./gradlew test --stacktrace # Execute gradle script to execute unit tests
+
+      - name: Generate test report # Generates tests reports as an artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: unit_tests_report.html
+          path: app/build/reports/tests/testDebugUnitTest/
